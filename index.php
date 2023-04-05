@@ -1,16 +1,16 @@
 <?php
+
 include './shared/head.php';
+
+ if(isset($_SESSION['admin'])):
+
+
 include './shared/header.php';
 include './shared/aside.php';
 include('./app/config.php');
 include('./app/function.php');
 
-if(isset($_SESSION['admin'])){
-
-} else {
-  path('admin/pages-login.php') ;
-}
-
+auth(2,3);
 
 ?>
 
@@ -26,10 +26,15 @@ if(isset($_SESSION['admin'])){
         <li class="breadcrumb-item active">Dashboard</li>
       </ol>
     </nav>
-  </div><!-- End Page Title -->
+  </div>
 
 
-</main><!-- End #main -->
+</main>
+<!-- End #main -->
 
 <?php include './shared/footer.php';?>
 <?php include './shared/script.php';?>
+
+
+<?php else :header("location:/odc/admin/pages-login.php") ;?>
+<?php endif ?>
