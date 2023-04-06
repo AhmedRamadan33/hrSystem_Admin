@@ -20,6 +20,8 @@ $s = mysqli_query($conn, $select);
 $row = mysqli_fetch_assoc($s);
 // /////
 
+
+
 if (isset($_POST['save'])) {
   $fullName =filterValidation( $_POST['fullName'] );
   $about = filterValidation($_POST['about'] );
@@ -102,18 +104,14 @@ if (isset($_POST['changePass'])) {
 
   $hashPassword = sha1($renewpassword) ;
 
-  $select = "SELECT * FROM admins  where id =$adminID ";
-  $s = mysqli_query($conn,$select);
-  $rowPass = mysqli_fetch_assoc($s);
-
-if ( $hashPassword2 == $rowPass['password']  && $newpassword == $renewpassword){
+if ( $hashPassword2 == $row['password']  && $newpassword == $renewpassword){
 
   $update = "UPDATE admins SET  password = '$hashPassword' where id =$adminID ";
   $u = mysqli_query($conn, $update);
   
  }  
  else{
-  dangerMessage( $newpassword != $renewpassword || $hashPassword2 != $rowPass['password'], " please Cofirm the Password and Current Password");
+  dangerMessage( $newpassword != $renewpassword || $hashPassword2 != $row['password'], " please Cofirm the Password and Current Password");
  }
 }    
 

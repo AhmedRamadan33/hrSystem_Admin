@@ -11,6 +11,8 @@ header("location:/odc/admin/pages-login.php") ;
 
 $adminName = $_SESSION['admin']['name'];
 $adminRule = $_SESSION['admin']['description'];
+$imageAdmin = $_SESSION['admin']['image'];
+
 
 
 ?>
@@ -20,7 +22,7 @@ $adminRule = $_SESSION['admin']['description'];
 
     <div class="d-flex align-items-center justify-content-between">
       <a href="/odc/index.php" class="logo d-flex align-items-center">
-        <img src="assets/img/logo.png" alt="">
+        <img src="/odc/assets/img/logo.png" alt="">
         <span class="d-none d-lg-block">NiceAdmin</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -46,7 +48,7 @@ $adminRule = $_SESSION['admin']['description'];
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="/odc/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+            <img src="/odc/admin/upload/<?= $imageAdmin ?>" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2"><?= $adminName ?> </span>
           </a><!-- End Profile Iamge Icon -->
 

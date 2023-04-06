@@ -20,21 +20,39 @@ if(isset($_GET['editId'])){
    $password = filterValidation($_POST['password'] );
    $hashPassword = sha1($password) ;
 
-   if (stringValidation($name, 3)) {
-    $errors[] = "Please Enter Admin Name and length > 2 ";
+   if (stringValidation($name, 2)) {
+    $errors[] = "Please Enter Admin Name and length > 1 char ";
 }
 if (stringValidation($password, 3)) {
-    $errors[] = "Please Enter password and length > 2 ";
+    $errors[] = "Please Enter password and length > 2 char ";
 }
+
+$select = "SELECT * FROM admins where name = '$name' ";
+$sAdmin = mysqli_query($conn,$select);
+$numRows = mysqli_num_rows ($sAdmin);
+
+if($numRows == 0 ){
 if (empty($errors)) {
    $update = "UPDATE `admins` SET name ='$name' , password = '$hashPassword' WHERE id = $editId";
    $i= mysqli_query($conn,$update);
    path('admin/list.php') ;
+ }
 }
+elseif($name == $row['name'] ){
+    $update = "UPDATE `admins` SET name = '$row[name]' , password = '$hashPassword' WHERE id = $editId";
+    $i= mysqli_query($conn,$update);
+    path('admin/list.php') ;
+  }
+  else{
+  
+    dangerMessage($numRows !=0 ,"UserName Already Exist");
+  }
+
+
    }
+
 }else{
     path('admin/list.php') ;
-
 }
 auth(2,3);
 ?>

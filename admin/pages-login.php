@@ -11,18 +11,19 @@ if(isset($_POST['login'])){
 
   $select = "SELECT * FROM adminalldata WHERE name = '$name' and password ='$hashPassword' ";
   $s = mysqli_query($conn,$select);
-
-  $numRows = mysqli_num_rows ($s);
-  
   $row = mysqli_fetch_assoc($s);
+  $numRows = mysqli_num_rows ($s);
+
   if($numRows == 1){
     $_SESSION['admin'] = [
       "name" =>$name,
       "rule" =>$row['rule'],
       "id" =>$row['id'],
       "description" =>$row['description'],
+      "image" =>$row['image'],
 
     ] ;
+
     $adminID = $_SESSION['admin']['id'];
 
     $selectprofileadmin = "SELECT * FROM profileadmin WHERE adminId = $adminID ";
@@ -62,7 +63,7 @@ if(isset($_POST['login'])){
 
               <div class="d-flex justify-content-center py-4">
                 <a href="pages-login.php" class="logo d-flex align-items-center w-auto">
-                  <img src="assets/img/logo.png" alt="">
+                  <img src="/odc/assets/img/logo.png" alt="">
                   <span class="d-none d-lg-block">NiceAdmin</span>
                 </a>
               </div><!-- End Logo -->
